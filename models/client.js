@@ -8,6 +8,7 @@ const clientSchema = new mongoose.Schema({
   profilePicture: String,
   FirstName: String,
   LastName: String,
+  test:String,
   //CIN OU TVA ET UN COPI DU MATRIQULE FISCALE
 
   verified: {

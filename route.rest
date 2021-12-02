@@ -1,0 +1,273 @@
+
+GET http://localhost:3000/client
+
+###
+
+POST http://localhost:3000/client
+Content-Type: application/json
+
+{
+    "identifant": "test",
+  "email":  "test",
+  "password": "test",
+  "phoneNumber": "58301255",
+  "profilePicture": "test",
+  "FirstName": "test",
+  "LastName": "test",
+  "verified": "false"
+}
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+
+{
+    "identifant": "test",
+    "email": "test",
+  "password": "test",
+  "phoneNumber": "58301255",
+  "profilePicture": "test",
+  "FirstName": "test",
+  "LastName": "test",
+  "verified": "false"
+}
+
+
+###
+DELETE http://localhost:3000/users/61894d7ed5c7f43ff1506012
+
+###
+PATCH http://localhost:3000/users/61894eb5d5c7f43ff1506016
+Content-Type: :application/json
+
+
+{
+     "email": "hello"  
+}
+
+###
+
+GET http://localhost:3000/users
+
+###
+PATCH http://localhost:3000/users/61894eb5d5c7f43ff1506016
+Content-Type: :application/json
+
+
+{
+     "email": "hello"  
+}
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "identifant": "test",
+  "email":  "test",
+  "password": "test",
+  "phoneNumber": "58301255",
+  "profilePicture": "test",
+  "FirstName": "test",
+  "LastName": "test",
+  "verified": "false"
+}
+
+
+###
+
+POST http://localhost:3000/users
+Content-Type: : application/json
+
+{
+   "identifant": "aa",
+  "email":  "bb",
+  "password": "test",
+  "phoneNumber": "58301255",
+  "profilePicture": "cc",
+  "FirstName": "dd",
+  "LastName": "ee",
+  "verified": "false"
+}
+
+###
+
+GET http://localhost:3000/client
+
+
+###
+
+POST http://localhost:3000/commande
+Content-Type: : application/json
+
+{
+   "identifant": "med",
+  "idcommande":  "14789",
+  "qte": "4563",
+  "verified": "false"
+ 
+}
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "identifant": "test",
+  "email":  "medmalek.bouzgarrou@esprit.tn",
+  "password": "test",
+  "phoneNumber": "58301255",
+  "profilePicture": "test",
+  "FirstName": "medmalek",
+  "LastName": "bouzgarrou",
+  "verified": "false"
+}
+
+###
+
+POST http://localhost:3000/client
+Content-Type: application/json
+
+{
+    "identifant": "test",
+  "email":  "ee",
+  "password": "teest",
+  "phoneNumber": "58301255",
+  "profilePicture": "test",
+  "FirstName": "test",
+  "LastName": "test",
+  "verified": "false"
+}
+
+###
+
+POST http://localhost:3000/client
+Content-Type: application/json
+
+{
+    "identifant": "777",
+  "email":  "sdsd",
+  "password": "test",
+  "phoneNumber": "20506123",
+  "profilePicture": "test",
+  "FirstName": "med",
+  "LastName": "malek",
+  "verified": "false"
+}
+
+###
+
+POST http://localhost:3000/facture
+Content-Type: application/json
+
+{
+    "identifant": "test",
+  "idfacture":  "12345679",
+  "montantfacture": "test",
+  "datefacture": "20506123",
+  "verified": "false"
+}
+
+###
+
+POST http://localhost:3000/fournisseur
+Content-Type: application/json
+
+{
+    "identifant": "777",
+  "idfournisseur":  "789456123",
+  "codefournisseur": "741852",
+  "profilePicture": "test",
+  "verified": "false"
+}
+
+###
+
+POST http://localhost:3000/societe
+Content-Type: application/json
+
+{
+    "identifant": "gel",
+  "email":  "ee",
+  "password": "teest",
+  "phoneNumber": "58301255",
+  "profilePicture": "test",
+  "FirstName": "test",
+  "LastName": "test",
+  "verified": "false"
+}
+
+###
+
+POST http://localhost:3000/produit
+Content-Type: application/json
+
+
+{
+    "identifant": "test",
+  "produitPicture": "test",
+  "information": "tres efficace",
+  "verified": "false"
+}
+
+###
+
+POST http://localhost:3000/stock
+Content-Type: application/json
+
+{
+    "identifant": "test",
+  "idstock":  "4567",
+  "qtestock": "78945",
+  "qtemin": "78",
+  "stockPicture": "malek",
+  "verified": "false"
+}
+
+###
+
+POST http://localhost:3000/commandes
+Content-Type: application/json
+
+
+{
+    "identifant": "med",
+    "idcommande": "test",
+  "qte": "test",
+  "verified": "false"
+}
+
+###
+
+
+PATCH http://localhost:3000/commandes/61918130f03ebf303bd9893e
+Content-Type: :application/json
+
+
+{
+     "identifiant": "hello"  
+}
+
+###
+
+DELETE http://localhost:3000/commandes/61918130f03ebf303bd9893e
+
+###
+
+POST http://localhost:3000/authentification
+Content-Type: application/json
+
+{
+    "identifant": "test",
+    "userName": "malek",
+  "password": "malek",
+  "verified": "false"
+}
+
+
+
+

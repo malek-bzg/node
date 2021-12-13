@@ -1,16 +1,12 @@
 const mongoose = require("mongoose");
 const produitSchema = new mongoose.Schema({
 
-  identifant: { type: String, required: true },
-  phoneNumber: Number,
-  produitPicture: String,
+  
   produitName: String,
+  marge: String,
   information: String,
   prix: String,
-  verified: {type:Boolean,
-default:false
-},
-  className: String,
-  parkId: Number,
+  produitImage: String,
+  
 });
 module.exports = mongoose.model("produit", produitSchema);

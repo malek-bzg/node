@@ -7,7 +7,7 @@ const { bool, boolean } = require("joi");
 
 const userSchema = new mongoose.Schema({
 
-  identifant: { type: String, required: true },
+  
   email: String,
   password: String,
   isadmin:Boolean,
@@ -15,12 +15,9 @@ const userSchema = new mongoose.Schema({
   profilePicture: String,
   FirstName: String,
   LastName: String,
-  verified: {
-    type : Boolean,
-    default: false
-  },
-  className: String,
-  parkId: Number,
+  ConfirmPass: String,
+  CIN: String
+ 
 });
 
 userSchema.methods.genertok = function () {

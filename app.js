@@ -6,6 +6,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require("mongoose");
+const multer = require("multer");
 
 var usersRouter = require('./routes/users');
 var clientRouter = require('./routes/client');
@@ -26,6 +27,26 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+//*************   public folder  *************** */
+app.use(express.static('./public'));
+app.get('/',(req,res)=>res.render('index'))
+app.post('/upload',(req,res)=>{
+ upload(req,res,(err)=>{
+   if(err){
+     res.render('index',{
+       msg: err
+     });
+
+   } else{
+     console.log(req.file);
+     res.send('test');
+   }
+
+ });
+});
+
+
+/**************** */
 
 
 //connection to data base

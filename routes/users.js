@@ -7,8 +7,11 @@ const Joi = require('joi');
 const mongoose = require('mongoose'); 
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
+const multer = require("../middleware/multer");
+
+const upload = require('../middleware/storage');
 /* GET users listing. */
-router.get("/",authentificateToken, async (_req, res, _next) => {
+router.get("/", async (_req, res, _next) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -17,7 +20,7 @@ router.get("/",authentificateToken, async (_req, res, _next) => {
   }
 });
 
-//get user
+//get ssss
 router.get('/:id', getUser,  (_req, res) => {
  // res.json(res.user);
  const token =  res.user.genertok()
@@ -53,6 +56,8 @@ router.post ('/login',getUserByMail,async(req,res)=>{
 })
       */
 router.post("/log", async (req, res) => {
+  console.log(req.body)
+
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -65,7 +70,9 @@ router.post("/log", async (req, res) => {
  // const token = user.generateAuthToken();
 // const token = jwt.sign({FirstName:user.FirstName ,_id:user._id  },'privet key')
    const token =  user.genertok()
-res.send(token);
+   console.log("you are connected")
+   res.status(200).json({message:"you are connected", token: token,user:user});
+//res.send(token);
 });
 
 function validate(req) {
@@ -125,23 +132,25 @@ res.send('ok');
 
 // ........................................................................add...........................................................................................................................
 router.post("/" ,async (req, res, _next) => {
+
+  console.log(req.body)
   const user = new User({
-    identifant: req.body.identifant,
+   
     email: req.body.email,
-    
     password: req.body.password,
     phoneNumber: req.body.phoneNumber,
-    profilePicture: req.body.profilePicture,
+    profilePicture:req.body.profilePicture,
     FirstName: req.body.FirstName,
     LastName: req.body.LastName,
-    verified: req.body.verified,
-    className: req.body.className,
-    parkId: req.body.parkId,
+   isadmin: req.body.isadmin,
+   ConfirmPass: req.body.ConfirmPass,
+   CIN:req.body.CIN,
+  
   });
-  console.log('hello2',user);
+  console.log('-----1-----',user.FirstName);
 
   try {
-
+    console.log('--------2---------');
     // .............................................................crypt password..................................................................................................................
   const  saltRounds  =  10 ; 
   const  salt = await bcrypt.genSalt(saltRounds);
@@ -192,12 +201,16 @@ router.patch("/:id",  getUser,  (req, res) => {
   if (req.body.LastName != null) {
     res.user.LastName = req.body.LastName;
   }
-  if (req.body.verified != null) {
-    res.user.verified = req.body.verified;
+  if (req.body.isadmin != null) {
+    res.user.isadmin = req.body.isadmin;
   }
-  if (req.body.parkId != null) {
-    res.user.parkId = req.body.parkId;
+  if (req.body.ConfirmPass != null) {
+    res.user.ConfirmPass = req.body.ConfirmPass;
   }
+  if (req.body.CIN != null) {
+    res.user.CIN = req.body.CIN;
+  }
+  
   try {
     res.user.save().then((updateduser) => {
       res.json(updateduser )
@@ -251,4 +264,4 @@ function authentificateToken (req,res,next){
   })
 
 }
-module.exports = router;
+module.exports = router; 

@@ -1,5 +1,6 @@
 var express = require("express");
 const Produit = require("../models/produit");
+const upload = require('../middleware/storage');
 var router = express.Router();
 
 /* GET users listing. */
@@ -12,20 +13,19 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-//Post users
-router.get("/:id", getProduit, (req, res) => {
+//:::::::::::::get by id
+router.get('/:id', getProduit, async (req, res) => {
   res.json(res.produit);
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/",upload.single('image'), async (req, res, next) => {
   const produit = new Produit({
-    identifant: req.body.identifant,
-    produitPicture: req.body.produitPicture,
     produitName: req.body.produitName,
+    marge: req.body.marge,
     information: req.body.information,
-    verified: req.body.verified,
     prix: req.body.prix,
-    parkId: req.body.parkId,
+    produitImage: req.file.filename,
+    
   });
   console.log('hello100',produit);
 
@@ -51,21 +51,26 @@ router.delete("/:id", getProduit, async (req, res) => {
 
 router.patch("/:id", getProduit,  (req, res) => {
 
-  if (req.body.phoneNumber != null) {
-        res.produit.phoneNumber = req.body.phoneNumber;
-      }
+
   if (req.body.produitName != null) {
     res.produit.produitName = req.body.produitName;
+  }
+  if (req.body.marge != null) {
+    res.produit.marge = req.body.marge;
+  }
+  if (req.body.prix != null) {
+    res.produit.prix = req.body.prix;
   }
   if (req.body.information != null) {
     res.produit.information = req.body.information;
   }
+  if (req.body.produitImage != null) {
+    res.produit.produitImage = req.body.produitImage;
+  }
   if (req.body.verified != null) {
     res.produit.verified = req.body.verified;
   }
-  if (req.body.parkId != null) {
-    res.produit.parkId = req.body.parkId;
-  }
+  
   try {
     res.produit.save().then((updatedproduit) => {
       res.json(updatedproduit )
@@ -76,17 +81,18 @@ router.patch("/:id", getProduit,  (req, res) => {
   }
 });
 
+
 async function getProduit(req, res, next) {
+  let produit
   try {
-    Produit = await Produit.findById(req.params.id);
-    if (Produit == null) {
-      return res.status(404).json({ message: "cannot find produit" });
+    produit = await Produit.findById(req.params.id);
+    if (produit == null) {
+      return res.status(404).json({ message: "cannot find user" });
     }
   } catch (error) {
-    return res.status(500).json({ message: err.message });
+    return res.status(500).json({ message:"2cannot find user" });
   }
-  res.produit = Produit;
+  res.produit =produit
   next();
 }
-
 module.exports = router;

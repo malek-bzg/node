@@ -1,14 +1,25 @@
 const mongoose = require("mongoose");
 const factureSchema = new mongoose.Schema({
 
-  identifant: { type: String, required: true },
-  idfacture: Number,
-  montantfacture: String,
-  datefacture: Number,
-  verified: {type:Boolean,
-default:false
+
+  dateCreation: {
+    type: String,
+    required:true,
+    default: new Date().toISOString()
 },
-  className: String,
-  parkId: Number,
+dateModif: {
+    type: String,
+    required:true,
+    default: new Date().toISOString()
+},
+  prod: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'prod'
+  }],
+  user :{
+    type :mongoose.Schema.Types.ObjectId,
+    ref : 'user'
+  }
+  
 });
 module.exports = mongoose.model("facture", factureSchema);

@@ -1,5 +1,5 @@
 
-GET http://localhost:3000/client
+GET http://localhost:3000/produit
 
 ###
 
@@ -53,6 +53,16 @@ GET http://localhost:3000/users
 
 ###
 PATCH http://localhost:3000/users/61894eb5d5c7f43ff1506016
+Content-Type: :application/json
+
+
+{
+     "email": "hello"  
+}
+
+###
+
+PATCH http://localhost:3000/users/img/61894eb5d5c7f43ff1506016
 Content-Type: :application/json
 
 

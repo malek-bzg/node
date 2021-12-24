@@ -1,77 +1,76 @@
 var express = require("express");
 const facture = require("../models/facture");
-const Facture = require("../models/facture");
+
 var router = express.Router();
 
-/* GET users listing. */
-router.get("/", async (req, res, next) => {
-  try {
-    const facture = await Facture.find();
-    res.json(facture);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+const User = require("../models/user");
 
-//Post users
-router.get("/:id", getFacture, (req, res) => {
-  res.json(res.facture);
+/* GET command listing. */
+router.get ('/', async (req,res) => {
+  try {
+      const factures = await Factures.find().populate('user').populate('prod')
+      // const cacturet = await Cactures.find().populate('prod')
+      if (factures.length>0){
+          res.json({
+            factures: factures})
+      }
+      else{
+          res.json({message:"nothing to show"})
+      }
+      
+  } catch (error) {
+      res.status(500).json({message: error.message})
+  }
+}) 
+
+//                   add commmend++++++++++++++++++++++++++++++++++++
+router.get("/:id", getFactures, (req, res) => {
+  res.json(res.factures);
 });
 
 router.post("/", async (req, res, next) => {
-  const facture = new Facture({
-    identifant: req.body.identifant,
-    idfacture: req.body.idfacture,
-    montantfacture: req.body.montantfacture,
-    datefacture: req.body.datefacture,
-    verified: req.body.verified,
-    className: req.body.className,
-    parkId: req.body.parkId,
+  const factures = new Factures({
+    prod: req.body.prod,
+    total: req.body.total,
+    addresse: req.body.addresse,
+    user: req.body.user
   });
-  console.log('hello2',facture);
+  console.log('hello236',factures);
 
   try {
-    const newFacture = await facture.save();
-
-      res.status(201).json({ newFacture });
-
-
+    const newCactures = await cactures.save();
+    const newnewCactures = await Cactures.findById(newCactures.id).populate('prod')
+    //const newnewnewCactures = await Cactures.findById(newnewCactures.id).populate('user')
+      res.status(201).json( newCactures );
   } catch (error) {
     res.status(400).json({message : error.message});
   }
 });
 
-router.delete("/:id", getFacture, async (req, res) => {
+router.delete("/:id", getCactures, async (req, res) => {
   try {
-    await res.facture.remove();
-    res.json({ message: "deleted facture" });
+    await res.cactures.remove();
+    res.json({ message: "deleted cactures" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-router.patch("/:id", getFacture,  (req, res) => {
-  if (req.body.identifant != null) {
-    res.facture.identifant = req.body.identifant;
+router.patch("/:id", getCactures,  (req, res) => {
+  if (req.body.prod != null) {
+    res.cactures.prod = req.body.prod;
   }
-  if (req.body.idfacture != null) {
-    res.facture.idfacture = req.body.idfacture;
+  if (req.body.total != null) {
+    res.cactures.total = req.body.total;
   }
-  if (req.body.montantfacture != null) {
-    res.facture.montantfacture = req.body.montantfacture;
+  if (req.body.addresse != null) {
+    res.cactures.addresse = req.body.addresse;
   }
-  if (req.body.datefacture != null) {
-    res.facture.datefacture = req.body.datefacture;
-  }
-  if (req.body.verified != null) {
-    res.facture.verified = req.body.verified;
-  }
-  if (req.body.parkId != null) {
-    res.facture.parkId = req.body.parkId;
-  }
+  res.cactures.dateModif = new Date().toISOString()
+  
   try {
-    res.facture.save().then((updatedfacture) => {
-      res.json(updatedfacture )
+    res.cactures.save().then((updatedcactures) => {
+      res.json(updatedcactures )
 
     });
   } catch (error) {
@@ -79,17 +78,44 @@ router.patch("/:id", getFacture,  (req, res) => {
   }
 });
 
-async function getFacture(req, res, next) {
+async function getCactures(req, res, next) {
   try {
-    facture = await Facture.findById(req.params.id);
-    if (facture == null) {
-      return res.status(404).json({ message: "cannot find facture" });
+    cactures = await Cactures.findById(req.params.id);
+    if (cactures == null) {
+      return res.status(404).json({ message: "cannot find cactures" });
     }
   } catch (error) {
     return res.status(500).json({ message: err.message });
   }
-  res.facture = facture;
+  res.cactures = cactures;
   next();
 }
 
+
+
+
+router.get ('/myCommand/:id',getCommandsByUser,async (req,res,next) => {
+  res.json({cactures:res.cactures})
+})
+
+
+
+async function getCommandsByUser  (req,res,next){
+  let cactures
+  let user
+  try {
+      user = await User.findById(req.params.id)
+
+      cactures = await Cactures.find({ user: user }).populate('user')
+      console.log( cactures);
+      if (cactures.length==0){
+        return res.status(404).json({message:"pas de command"})
+      }
+  } catch (error) {
+    return res.status(500).json({message:"Id erroné"})
+
+  }
+  res.cactures = cactures
+  next()
+}
 module.exports = router;

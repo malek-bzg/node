@@ -3,16 +3,26 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev": "nodemon app.jse",
     "devStart": "nodemon server.js"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "^0.31.2",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
     "mongoose": "^6.0.12",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "multer": "^1.4.3",
+    "nodemailer": "^6.7.2",
+    "socket.io": "^4.4.0",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.2.0"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
@@ -21,5 +31,5 @@
   "main": "app.js",
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "This is the backend of our mobile application \"Peddler\" we are working with Nodejs to implement our project you need to use : Vscode Mongoose to nuse the database on desktop express mongoose  extend schema (for classes heritage) Folders are :Models for collection Routes for REST API routes and we installed REST CLIENT extension to execute rather than using postman"
 }

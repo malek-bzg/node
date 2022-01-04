@@ -34,7 +34,8 @@ II. Produit
 * Inscription (POST): localhost:3000/api/utilisateur/inscription
 * Confirmation email (GET): localhost:3000/api/utilisateur/confirmation/:token
 * ModifierProfil (PUT): localhost:3000/api/utilisateur/modifierProfil
-III. Panier
+III. Swagger
+*. http://localhost:3000/docs/#/
 
 # Auteurs
 * Mohamed Ali Dbira

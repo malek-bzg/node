@@ -36,6 +36,11 @@ II. Produit
 * ModifierProfil (PUT): localhost:3000/api/utilisateur/modifierProfil
 III. Swagger
 *. http://localhost:3000/docs/#/
+III. Docker
+1. start 
+*. docker-compose up --build
+2. down
+*.  docker-compose down
 
 # Auteurs
 * Mohamed Ali Dbira
